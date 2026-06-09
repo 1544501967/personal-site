@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8f9fa"/>
+      <stop offset="100%" stop-color="#e9ecef"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E40ED"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Browser window -->
+  <rect width="800" height="450" rx="12" fill="url(#bg)"/>
+
+  <!-- Browser chrome -->
+  <rect width="800" height="36" rx="12" fill="#ffffff"/>
+  <rect y="24" width="800" height="12" fill="#ffffff"/>
+  <circle cx="18" cy="14" r="5" fill="#ff5f57"/>
+  <circle cx="36" cy="14" r="5" fill="#febc2e"/>
+  <circle cx="54" cy="14" r="5" fill="#28c840"/>
+  <rect x="200" y="6" width="400" height="20" rx="10" fill="#f1f3f5"/>
+
+  <!-- Nav bar -->
+  <rect y="36" width="800" height="44" fill="#ffffff"/>
+  <line x1="0" y1="79" x2="800" y2="79" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="40" y="48" width="60" height="20" rx="4" fill="#1E40ED" opacity="0.1"/>
+  <text x="54" y="63" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="600" fill="#1E40ED">Daniel</text>
+  <rect x="560" y="50" width="40" height="18" rx="4" fill="none" stroke="#e5e7eb"/>
+  <text x="572" y="63" font-family="system-ui" font-size="10" fill="#6b7280">首页</text>
+  <rect x="610" y="50" width="40" height="18" rx="4" fill="none" stroke="#e5e7eb"/>
+  <text x="622" y="63" font-family="system-ui" font-size="10" fill="#6b7280">关于</text>
+  <rect x="660" y="50" width="40" height="18" rx="4" fill="none" stroke="#e5e7eb"/>
+  <text x="672" y="63" font-family="system-ui" font-size="10" fill="#6b7280">项目</text>
+  <rect x="710" y="50" width="40" height="18" rx="4" fill="none" stroke="#e5e7eb"/>
+  <text x="722" y="63" font-family="system-ui" font-size="10" fill="#6b7280">随笔</text>
+
+  <!-- Hero section -->
+  <rect y="80" width="800" height="220" fill="#ffffff"/>
+  <circle cx="120" cy="170" r="44" fill="url(#blue)"/>
+  <text x="120" y="180" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="28" font-weight="700" fill="#ffffff">D</text>
+
+  <text x="190" y="155" font-family="Inter,system-ui,sans-serif" font-size="26" font-weight="700" fill="#1f2937">你好，我是</text>
+  <text x="385" y="155" font-family="Inter,system-ui,sans-serif" font-size="26" font-weight="700" fill="#1E40ED">Daniel</text>
+  <text x="190" y="185" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#6b7280">一名热爱技术的开发者。专注于构建优雅、高效的软件产品，</text>
+  <text x="190" y="205" font-family="Inter,system-ui,sans-serif" font-size="13" fill="#6b7280">乐于分享技术思考和实践经验。</text>
+
+  <rect x="190" y="225" width="90" height="32" rx="8" fill="#1E40ED"/>
+  <text x="212" y="246" font-family="system-ui" font-size="11" font-weight="500" fill="#ffffff">了解更多 →</text>
+  <rect x="290" y="225" width="90" height="32" rx="8" fill="none" stroke="#e5e7eb"/>
+  <text x="312" y="246" font-family="system-ui" font-size="11" font-weight="500" fill="#1f2937">查看项目</text>
+
+  <!-- Cards section -->
+  <rect y="300" width="800" height="150" fill="#FAF9F8"/>
+  <text x="40" y="330" font-family="Inter,system-ui,sans-serif" font-size="16" font-weight="700" fill="#1f2937">最新随笔</text>
+  <text x="720" y="330" font-family="system-ui" font-size="11" fill="#1E40ED">查看全部 →</text>
+
+  <!-- Card 1 -->
+  <rect x="40" y="345" width="230" height="90" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="52" y="355" width="36" height="16" rx="8" fill="#eff6ff"/>
+  <text x="62" y="367" font-family="system-ui" font-size="8" fill="#1E40ED">随笔</text>
+  <text x="52" y="387" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="600" fill="#1f2937">Hello World</text>
+  <text x="52" y="405" font-family="system-ui" font-size="9" fill="#6b7280">这是我的第一篇随笔…</text>
+  <text x="52" y="425" font-family="system-ui" font-size="8" fill="#9ca3af">2026年6月10日</text>
+
+  <!-- Card 2 -->
+  <rect x="285" y="345" width="230" height="90" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="297" y="355" width="36" height="16" rx="8" fill="#eff6ff"/>
+  <text x="307" y="367" font-family="system-ui" font-size="8" fill="#1E40ED">教程</text>
+  <text x="297" y="387" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="600" fill="#1f2937">TS 实用技巧</text>
+  <text x="297" y="405" font-family="system-ui" font-size="9" fill="#6b7280">分享常用的 TS 技巧…</text>
+  <text x="297" y="425" font-family="system-ui" font-size="8" fill="#9ca3af">2026年6月8日</text>
+
+  <!-- Card 3 -->
+  <rect x="530" y="345" width="230" height="90" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+  <rect x="542" y="355" width="44" height="16" rx="8" fill="#eff6ff"/>
+  <text x="549" y="367" font-family="system-ui" font-size="8" fill="#1E40ED">Astro</text>
+  <text x="542" y="387" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="600" fill="#1f2937">个人主页</text>
+  <text x="542" y="405" font-family="system-ui" font-size="9" fill="#6b7280">基于 Astro 搭建的…</text>
+  <text x="542" y="425" font-family="system-ui" font-size="8" fill="#9ca3af">Astro · Tailwind</text>
+</svg>
