@@ -195,4 +195,43 @@
     border-radius: 8px;
     margin: 1.5rem 0;
   }
+
+  .prose-custom table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .prose-custom thead {
+    background-color: var(--color-bg-alt);
+  }
+
+  .prose-custom th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    border-bottom: 2px solid var(--color-border);
+    white-space: nowrap;
+  }
+
+  .prose-custom td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    line-height: 1.6;
+  }
+
+  .prose-custom tbody tr:hover {
+    background-color: var(--color-bg-alt);
+  }
+
+  .prose-custom tbody tr:last-child td {
+    border-bottom: none;
+  }
 }
