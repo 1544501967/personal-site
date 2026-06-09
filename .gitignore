@@ -32,4 +32,10 @@ pnpm-debug.log*
 *~
 
 # omc state
-.omc/
+.omc/sessions/
+.omc/state/
+.omc/notepad.md
+.omc/project-memory.json
+.omc/plans/
+.omc/research/
+.omc/logs/
