@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const allTags = [...new Set(allPosts.flatMap(({ data }) => data.tags))];
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+function estimateReadTime(body: string): string {
+  const minutes = Math.ceil(body.length / 400);
+  return `${minutes} 分钟`;
+}
+---
+
+<BaseLayout title="随笔 - Daniel" description="我的技术随笔、教程和思考。">
+  <section class="section-padding">
+    <div class="section-container">
+      <div class="max-w-3xl mx-auto">
+        <h1 class="text-3xl font-bold mb-2">随笔</h1>
+        <p class="text-text-muted mb-8">技术思考、教程记录和个人感悟。</p>
+
+        <!-- Filter Tags -->
+        <div class="flex flex-wrap gap-2 mb-8">
+          <button
+            class="tag bg-primary text-white cursor-pointer"
+            data-filter="all"
+          >
+            全部
+          </button>
+          {allTags.map((tag) => (
+            <button class="tag cursor-pointer hover:bg-primary hover:text-white transition-colors" data-filter={tag}>
+              {tag}
+            </button>
+          ))}
+        </div>
+
+        <!-- Posts List -->
+        <div class="space-y-4" id="posts-list">
+          {posts.map((post) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="card p-6 block group"
+              data-tags={post.data.tags.join(',')}
+            >
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                <h2 class="font-semibold text-lg group-hover:text-primary transition-colors">
+                  {post.data.title}
+                </h2>
+                <time
+                  datetime={post.data.pubDate.toISOString()}
+                  class="text-xs text-text-muted whitespace-nowrap shrink-0"
+                >
+                  {formatDate(post.data.pubDate)}
+                </time>
+              </div>
+              <p class="text-text-muted text-sm leading-relaxed mb-3">
+                {post.data.description}
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex flex-wrap gap-2">
+                  {post.data.tags.map((tag) => (
+                    <span class="tag text-xs">{tag}</span>
+                  ))}
+                </div>
+                {post.body && (
+                  <span class="text-xs text-text-muted">{estimateReadTime(post.body)}</span>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {posts.length === 0 && (
+          <div class="text-center py-16 text-text-muted">
+            <p class="text-lg mb-2">还没有随笔</p>
+            <p class="text-sm">敬请期待...</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const filterButtons = document.querySelectorAll('[data-filter]');
+  const postCards = document.querySelectorAll('#posts-list > a');
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+
+      filterButtons.forEach((b) => {
+        b.classList.remove('bg-primary', 'text-white');
+      });
+      btn.classList.add('bg-primary', 'text-white');
+
+      postCards.forEach((card) => {
+        const tags = card.getAttribute('data-tags') ?? '';
+        if (filter === 'all' || tags.split(',').includes(filter!)) {
+          (card as HTMLElement).style.display = '';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+---
+
+<BaseLayout title="关于 - Daniel" description="关于我的个人介绍、技能和工作经历。">
+  <section class="section-padding">
+    <div class="section-container">
+      <div class="max-w-3xl mx-auto">
+        <!-- Intro -->
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8 mb-16">
+          <div class="w-32 h-32 rounded-2xl bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white text-4xl font-bold shrink-0">
+            D
+          </div>
+          <div class="text-center sm:text-left">
+            <h1 class="text-3xl font-bold mb-2">Daniel</h1>
+            <p class="text-text-muted text-lg mb-4">开发者 / 工程师</p>
+            <p class="text-text-muted leading-relaxed">
+              热爱编程，专注于构建高质量的软件产品。
+              喜欢探索新技术，乐于分享学习过程中的思考和经验。
+              相信代码可以改变世界，也相信好的代码本身就是一种艺术。
+            </p>
+            <div class="mt-4">
+              <SocialLinks />
+            </div>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="mb-16">
+          <h2 class="text-2xl font-bold mb-6">技能</h2>
+          <div class="grid sm:grid-cols-2 gap-4">
+            {[
+              {
+                category: '前端开发',
+                skills: ['TypeScript', 'React', 'Vue', 'Next.js', 'Tailwind CSS'],
+              },
+              {
+                category: '后端开发',
+                skills: ['Node.js', 'Go', 'Python', 'PostgreSQL', 'Redis'],
+              },
+              {
+                category: '工具与平台',
+                skills: ['Git', 'Docker', 'CI/CD', 'AWS', 'Linux'],
+              },
+              {
+                category: '其他',
+                skills: ['系统设计', '技术写作', '开源贡献', '敏捷开发'],
+              },
+            ].map(({ category, skills }) => (
+              <div class="card p-5">
+                <h3 class="font-semibold text-sm text-primary mb-3">{category}</h3>
+                <div class="flex flex-wrap gap-2">
+                  {skills.map((skill) => (
+                    <span class="tag">{skill}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="mb-16">
+          <h2 class="text-2xl font-bold mb-6">工作经历</h2>
+          <div class="space-y-6">
+            {[
+              {
+                role: '高级前端工程师',
+                company: '某科技公司',
+                period: '2024 - 至今',
+                description: '负责核心产品的前端架构设计和开发，推动团队技术栈升级和最佳实践落地。',
+              },
+              {
+                role: '全栈工程师',
+                company: '某创业公司',
+                period: '2022 - 2024',
+                description: '从零搭建产品技术体系，参与产品设计和全栈开发，支撑业务快速增长。',
+              },
+            ].map(({ role, company, period, description }) => (
+              <div class="relative pl-6 border-l-2 border-primary/20">
+                <div class="absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-primary"></div>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
+                  <h3 class="font-semibold">{role}</h3>
+                  <span class="text-sm text-text-muted">{period}</span>
+                </div>
+                <p class="text-sm text-primary font-medium mb-1">{company}</p>
+                <p class="text-text-muted text-sm leading-relaxed">{description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div>
+          <h2 class="text-2xl font-bold mb-6">教育背景</h2>
+          <div class="space-y-6">
+            {[
+              {
+                school: '某大学',
+                degree: '计算机科学与技术 学士',
+                period: '2018 - 2022',
+              },
+            ].map(({ school, degree, period }) => (
+              <div class="relative pl-6 border-l-2 border-primary/20">
+                <div class="absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-primary"></div>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
+                  <h3 class="font-semibold">{school}</h3>
+                  <span class="text-sm text-text-muted">{period}</span>
+                </div>
+                <p class="text-sm text-primary font-medium">{degree}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
