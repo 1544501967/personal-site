@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const categoryMap: Record<string, string> = {
+  work: '工作项目',
+  personal: '个人项目',
+  opensource: '开源项目',
+};
+
+const statusMap: Record<string, { label: string; color: string }> = {
+  planning: { label: '规划中', color: 'bg-gray-100 text-gray-600' },
+  'in-progress': { label: '进行中', color: 'bg-blue-50 text-blue-600' },
+  completed: { label: '已完成', color: 'bg-green-50 text-green-600' },
+  archived: { label: '已归档', color: 'bg-gray-100 text-gray-500' },
+};
+
+const status = statusMap[project.data.status] ?? statusMap['in-progress'];
+const category = categoryMap[project.data.category] ?? '个人项目';
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long' });
+}
+
+function getDuration(): string {
+  const start = project.data.startDate;
+  const end = project.data.endDate;
+  if (!start) return '';
+  const startStr = formatDate(start);
+  const endStr = end ? formatDate(end) : '至今';
+  return `${startStr} — ${endStr}`;
+}
+---
+
+<BaseLayout title={`${project.data.title} - Daniel`} description={project.data.description}>
+  <article class="section-padding">
+    <div class="section-container">
+      <div class="max-w-4xl mx-auto">
+
+        <!-- Back link -->
+        <a href="/projects" class="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary transition-colors mb-8">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          返回项目列表
+        </a>
+
+        <!-- Header -->
+        <header class="mb-10">
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class={`tag ${status.color}`}>{status.label}</span>
+            <span class="tag">{category}</span>
+            {project.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-3">{project.data.title}</h1>
+          <p class="text-text-muted text-lg leading-relaxed mb-4">{project.data.description}</p>
+
+          <div class="flex flex-wrap items-center gap-4 text-sm text-text-muted">
+            {project.data.startDate && (
+              <span class="flex items-center gap-1.5">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                {getDuration()}
+              </span>
+            )}
+          </div>
+
+          <!-- Links -->
+          <div class="flex items-center gap-4 mt-4">
+            {project.data.github && (
+              <a href={project.data.github} target="_blank" rel="noopener noreferrer" class="btn-secondary text-sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                查看源码
+              </a>
+            )}
+            {project.data.demo && (
+              <a href={project.data.demo} target="_blank" rel="noopener noreferrer" class="btn-primary text-sm">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                在线演示
+              </a>
+            )}
+          </div>
+        </header>
+
+        <!-- Cover Image -->
+        {project.data.image && (
+          <div class="rounded-xl overflow-hidden border border-border mb-10">
+            <img src={project.data.image} alt={project.data.title} class="w-full" loading="lazy" />
+          </div>
+        )}
+
+        <!-- Gallery -->
+        {project.data.gallery.length > 0 && (
+          <div class="mb-10">
+            <h2 class="text-xl font-bold mb-4">📸 项目截图</h2>
+            <div class="grid sm:grid-cols-2 gap-4">
+              {project.data.gallery.map((img, i) => (
+                <div class="rounded-xl overflow-hidden border border-border hover:shadow-lg transition-shadow">
+                  <img
+                    src={img}
+                    alt={`${project.data.title} 截图 ${i + 1}`}
+                    class="w-full"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Content -->
+        <div class="prose-custom">
+          <Content />
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="mt-16 pt-8 border-t border-border">
+          <a href="/projects" class="btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            返回项目列表
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

@@ -111,54 +111,29 @@ function estimateReadTime(body: string): string {
         </div>
         <div class="grid md:grid-cols-3 gap-6">
           {featuredProjects.map((project) => (
-            <div class="card overflow-hidden group">
-              {project.data.image ? (
-                <div class="aspect-video bg-bg-alt flex items-center justify-center overflow-hidden">
-                  <div class="w-full h-full bg-gradient-to-br from-primary/10 to-primary-light/10 flex items-center justify-center">
-                    <span class="text-4xl font-bold text-primary/20">{project.data.title.charAt(0)}</span>
-                  </div>
-                </div>
-              ) : (
-                <div class="aspect-video bg-gradient-to-br from-primary/5 to-primary-light/5 flex items-center justify-center">
-                  <span class="text-4xl font-bold text-primary/20">{project.data.title.charAt(0)}</span>
-                </div>
-              )}
+            <a href={`/projects/${project.id}`} class="card overflow-hidden group block">
+              <div class="aspect-video bg-gradient-to-br from-primary/5 to-primary-light/5 flex items-center justify-center overflow-hidden">
+                {project.data.image
+                  ? <img src={project.data.image} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                  : <span class="text-4xl font-bold text-primary/20">{project.data.title.charAt(0)}</span>
+                }
+              </div>
               <div class="p-6">
                 <div class="flex flex-wrap gap-2 mb-3">
                   {project.data.tags.map((tag) => (
                     <span class="tag">{tag}</span>
                   ))}
                 </div>
-                <h3 class="font-semibold text-lg mb-2">{project.data.title}</h3>
+                <h3 class="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">{project.data.title}</h3>
                 <p class="text-text-muted text-sm leading-relaxed">
                   {project.data.description}
                 </p>
-                <div class="flex items-center gap-3 mt-4">
-                  {project.data.github && (
-                    <a
-                      href={project.data.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="text-sm text-text-muted hover:text-primary transition-colors flex items-center gap-1"
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-                      GitHub
-                    </a>
-                  )}
-                  {project.data.demo && (
-                    <a
-                      href={project.data.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="text-sm text-text-muted hover:text-primary transition-colors flex items-center gap-1"
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                      Demo
-                    </a>
-                  )}
-                </div>
+                <span class="text-sm text-primary font-medium flex items-center gap-1 mt-3">
+                  查看详情
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

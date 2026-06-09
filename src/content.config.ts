@@ -20,10 +20,15 @@ const projects = defineCollection({
     description: z.string(),
     image: z.string().optional(),
     tags: z.array(z.string()).default([]),
+    category: z.enum(['work', 'personal', 'opensource']).default('personal'),
+    status: z.enum(['planning', 'in-progress', 'completed', 'archived']).default('in-progress'),
+    gallery: z.array(z.string()).default([]),
     github: z.string().optional(),
     demo: z.string().optional(),
     featured: z.boolean().default(false),
     order: z.number().default(0),
+    startDate: z.coerce.date().optional(),
+    endDate: z.coerce.date().optional(),
   }),
 });
 
