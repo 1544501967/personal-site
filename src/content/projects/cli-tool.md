@@ -3,6 +3,8 @@ title: "CLI 工具集"
 description: "一个实用的命令行工具集，包含常用的开发辅助工具。"
 tags: ["Node.js", "CLI", "TypeScript"]
 github: "https://github.com/"
+gallery:
+  - "/projects/personal-site.svg"
 featured: true
 order: 2
 ---
