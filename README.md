@@ -1,4 +1,4 @@
-# Daniel's Personal Site
+# Miro's Personal Site
 
 基于 Astro + Tailwind CSS 的个人主页，参考 exa.ai 极简设计风格。
 
