@@ -97,18 +97,20 @@ import SocialLinks from '../components/SocialLinks.astro';
           <div class="space-y-6">
             {[
               {
-                school: '某大学',
-                degree: '计算机科学与技术 学士',
-                period: '2018 - 2022',
+                school: '杭州师范大学',
+                degree: '计算机科学与技术 本科',
+                period: '2021年9月 - 2025年6月',
+                description: '系统学习计算机基础、软件工程、数据库、算法与 Web 开发等方向，注重工程实践、产品思维和持续学习。',
               },
-            ].map(({ school, degree, period }) => (
+            ].map(({ school, degree, period, description }) => (
               <div class="relative pl-6 border-l-2 border-primary/20">
                 <div class="absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-primary"></div>
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
                   <h3 class="font-semibold">{school}</h3>
                   <span class="text-sm text-text-muted">{period}</span>
                 </div>
-                <p class="text-sm text-primary font-medium">{degree}</p>
+                <p class="text-sm text-primary font-medium mb-1">{degree}</p>
+                <p class="text-text-muted text-sm leading-relaxed">{description}</p>
               </div>
             ))}
           </div>
