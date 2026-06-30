@@ -10,15 +10,15 @@ import SocialLinks from '../components/SocialLinks.astro';
         <!-- Intro -->
         <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8 mb-16">
           <div class="w-32 h-32 rounded-2xl bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white text-4xl font-bold shrink-0">
-            D
+            M
           </div>
           <div class="text-center sm:text-left">
             <h1 class="text-3xl font-bold mb-2">Miro</h1>
-            <p class="text-text-muted text-lg mb-4">开发者 / 工程师</p>
+            <p class="text-text-muted text-lg mb-4">全栈 · AI 开发工程师</p>
             <p class="text-text-muted leading-relaxed">
-              热爱编程，专注于构建高质量的软件产品。
-              喜欢探索新技术，乐于分享学习过程中的思考和经验。
-              相信代码可以改变世界，也相信好的代码本身就是一种艺术。
+              一名专注 AI 应用开发的工程师，热衷于把大模型与智能体技术落地到真实业务场景。
+              擅长用 Python 构建智能体工作流，也熟悉前端开发与数据处理；
+              工作之余喜欢探索新技术，在实战中沉淀经验、记录思考。
             </p>
             <div class="mt-4">
               <SocialLinks />
@@ -32,20 +32,20 @@ import SocialLinks from '../components/SocialLinks.astro';
           <div class="grid sm:grid-cols-2 gap-4">
             {[
               {
+                category: 'AI 应用开发',
+                skills: ['Python', 'LangChain', 'LangGraph', 'RAG', 'Prompt 工程', '工具调用', 'MCP'],
+              },
+              {
+                category: '机器学习',
+                skills: ['LightGBM', 'XGBoost', 'YOLOv10', '数据预处理', '模型训练与调优'],
+              },
+              {
                 category: '前端开发',
-                skills: ['TypeScript', 'React', 'Vue', 'Next.js', 'Tailwind CSS'],
+                skills: ['Vue', 'React', 'TypeScript', 'Astro', 'Tailwind CSS'],
               },
               {
-                category: '后端开发',
-                skills: ['Node.js', 'Go', 'Python', 'PostgreSQL', 'Redis'],
-              },
-              {
-                category: '工具与平台',
-                skills: ['Git', 'Docker', 'CI/CD', 'AWS', 'Linux'],
-              },
-              {
-                category: '其他',
-                skills: ['系统设计', '技术写作', '开源贡献', '敏捷开发'],
+                category: '后端与工具',
+                skills: ['SQL', 'PostgreSQL', 'Docker', 'Git', 'n8n'],
               },
             ].map(({ category, skills }) => (
               <div class="card p-5">
@@ -66,16 +66,16 @@ import SocialLinks from '../components/SocialLinks.astro';
           <div class="space-y-6">
             {[
               {
-                role: '高级前端工程师',
-                company: '某科技公司',
-                period: '2024 - 至今',
-                description: '负责核心产品的前端架构设计和开发，推动团队技术栈升级和最佳实践落地。',
+                role: 'AI 应用开发工程师',
+                company: '杭州数鸢科技有限公司',
+                period: '2025.06 - 至今',
+                description: '负责电商场景智能体应用的设计与开发，围绕客服辅助、利润分析与爆品方案生成推进项目落地。基于 LangChain / LangGraph 搭建智能体工作流，完成意图识别、任务拆解、流程编排、工具调用与结果生成等核心能力建设。',
               },
               {
-                role: '全栈工程师',
-                company: '某创业公司',
-                period: '2022 - 2024',
-                description: '从零搭建产品技术体系，参与产品设计和全栈开发，支撑业务快速增长。',
+                role: 'Python 应用开发（实习）',
+                company: '杭州四维映射软件有限公司',
+                period: '2025.03 - 2025.06',
+                description: '负责基于 YOLOv10 的电路元器件检测模型开发，完成数据增强、模型训练与超参数调优；设计从图像输入到拓扑输出的完整 pipeline，开发后处理算法将检测结果转化为电路节点图（Netlist），支撑下游仿真软件运行。',
               },
             ].map(({ role, company, period, description }) => (
               <div class="relative pl-6 border-l-2 border-primary/20">
@@ -100,7 +100,7 @@ import SocialLinks from '../components/SocialLinks.astro';
                 school: '杭州师范大学',
                 degree: '计算机科学与技术 本科',
                 period: '2021年9月 - 2025年6月',
-                description: '系统学习计算机基础、软件工程、数据库、算法与 Web 开发等方向，注重工程实践、产品思维和持续学习。',
+                description: '主修计算机组成原理、操作系统、计算机网络、数据结构与算法、数据库系统、人工智能基础等核心课程，并在 AI 应用与软件工程方向持续深入实践。',
               },
             ].map(({ school, degree, period, description }) => (
               <div class="relative pl-6 border-l-2 border-primary/20">

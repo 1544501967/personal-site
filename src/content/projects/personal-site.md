@@ -8,8 +8,8 @@ status: "in-progress"
 gallery:
   - "/projects/personal-site.svg"
 github: "https://github.com/1544501967/personal-site"
-featured: true
-order: 1
+featured: false
+order: 7
 startDate: 2026-06-10
 ---
 
