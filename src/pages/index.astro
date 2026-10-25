@@ -2,150 +2,294 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>瑶瑶，我想对你说 ❤</title>
+<title>给瑶瑶的一封信</title>
 <style is:inline>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --rose: #ff7d9c;
+    --rose-deep: #e5486b;
+    --gold: #e8c39a;
+    --ink: #f5efe8;
+    --muted: #b9aeb8;
+  }
   body {
-    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: linear-gradient(160deg, #fff0f3 0%, #ffe4ec 45%, #ffd6e8 100%);
-    color: #5b2333;
+    font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+    background: radial-gradient(1200px 800px at 80% -10%, #3b2b58 0%, transparent 60%),
+                radial-gradient(900px 700px at 10% 110%, #57294a 0%, transparent 55%),
+                linear-gradient(180deg, #14101f 0%, #1d1530 55%, #241a33 100%);
+    color: var(--ink);
     min-height: 100vh;
     overflow-x: hidden;
   }
-  #hearts { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-  .wrap { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; padding: 56px 20px 80px; text-align: center; }
-  .big-heart { font-size: 72px; animation: beat 1.2s ease-in-out infinite; display: inline-block; }
-  @keyframes beat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.25); } 45% { transform: scale(1.05); } }
-  h1 { font-size: 2rem; margin: 16px 0 8px; letter-spacing: 1px; }
-  .subtitle { color: #a34a63; font-size: 1.05rem; margin-bottom: 36px; }
-  .story { text-align: left; background: rgba(255,255,255,.65); border-radius: 20px; padding: 28px 26px; line-height: 2; font-size: 1.02rem; box-shadow: 0 8px 30px rgba(255, 107, 139, .15); }
-  .story p { margin-bottom: 14px; }
-  .story p:last-child { margin-bottom: 0; }
-  .story .highlight { color: #e5486b; font-weight: 600; }
-  .question { margin-top: 48px; }
-  .question h2 { font-size: 1.6rem; margin-bottom: 8px; }
-  .question p { color: #a34a63; margin-bottom: 24px; }
-  .btns { position: relative; height: 64px; }
-  button { border: none; cursor: pointer; border-radius: 999px; font-size: 1.1rem; padding: 14px 34px; transition: transform .2s; }
-  #yes { background: #ff5c7a; color: #fff; box-shadow: 0 6px 20px rgba(255, 92, 122, .45); }
-  #yes:hover { transform: scale(1.08); }
-  #no { background: #fff; color: #a34a63; border: 2px solid #ffc2d1; position: absolute; left: 62%; top: 0; }
-  #result { display: none; margin-top: 40px; background: rgba(255,255,255,.75); border-radius: 20px; padding: 30px 24px; box-shadow: 0 8px 30px rgba(255, 107, 139, .2); }
-  #result h2 { font-size: 1.7rem; color: #e5486b; margin-bottom: 12px; }
-  #result p { line-height: 1.9; color: #5b2333; }
-  .sign { margin-top: 56px; color: #a34a63; font-size: .95rem; }
-  .sign b { color: #e5486b; }
+  #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  #fx { position: fixed; inset: 0; z-index: 5; pointer-events: none; display: none; }
+  .wrap { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 22px 90px; }
+
+  /* ---------- Hero ---------- */
+  .hero { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .to { letter-spacing: .55em; text-indent: .55em; font-size: .85rem; color: var(--gold); margin-bottom: 26px; }
+  .hero h1 {
+    font-size: clamp(3.2rem, 14vw, 6rem);
+    font-weight: 600; line-height: 1.15; letter-spacing: .12em; text-indent: .12em;
+    background: linear-gradient(135deg, #fff 20%, #ffd9e4 45%, var(--rose) 70%, var(--gold) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    text-shadow: 0 0 60px rgba(255, 125, 156, .25);
+  }
+  .hero .line { width: 56px; height: 1px; background: var(--gold); opacity: .7; margin: 30px 0 22px; }
+  .hero p { color: var(--muted); font-size: 1.02rem; line-height: 2; max-width: 26em; }
+  .scroll-hint { margin-top: 52px; color: var(--gold); font-size: .85rem; letter-spacing: .3em; text-indent: .3em; animation: floaty 2.4s ease-in-out infinite; }
+  @keyframes floaty { 0%, 100% { transform: translateY(0); opacity: .9; } 50% { transform: translateY(8px); opacity: .5; } }
+
+  /* ---------- Envelope ---------- */
+  .env-stage { padding: 40px 0 10px; text-align: center; }
+  .env-stage h2 { font-size: 1.35rem; font-weight: 500; letter-spacing: .15em; margin-bottom: 10px; }
+  .env-stage p { color: var(--muted); font-size: .95rem; margin-bottom: 34px; }
+  .envelope { position: relative; width: min(340px, 84vw); height: 220px; margin: 0 auto; cursor: pointer; perspective: 900px; }
+  .env-body {
+    position: absolute; inset: 0; border-radius: 10px;
+    background: linear-gradient(160deg, #f7e8ec, #efd3da);
+    box-shadow: 0 24px 60px rgba(0,0,0,.45);
+    overflow: hidden;
+  }
+  .env-body:before, .env-body:after {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+    background: linear-gradient(160deg, rgba(255,255,255,.5), rgba(255,255,255,0) 55%);
+  }
+  .env-letter {
+    position: absolute; left: 14px; right: 14px; top: 12px; height: 180px; border-radius: 6px;
+    background: #fffdf7; color: #4a3542; padding: 20px 18px; text-align: left;
+    font-size: .95rem; line-height: 1.9;
+    box-shadow: 0 4px 16px rgba(0,0,0,.15);
+    transition: transform 1s ease .25s;
+  }
+  .env-letter b { color: var(--rose-deep); }
+  .env-flap {
+    position: absolute; left: 0; right: 0; top: 0; height: 130px; z-index: 2;
+    background: linear-gradient(180deg, #f3d7de, #eac3cd);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform .8s ease;
+    border-radius: 10px 10px 0 0;
+  }
+  .env-seal {
+    position: absolute; left: 50%; top: 108px; transform: translateX(-50%); z-index: 3;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ff9db1, var(--rose-deep));
+    color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px;
+    box-shadow: 0 6px 18px rgba(229, 72, 107, .5);
+    transition: opacity .4s, transform .4s;
+  }
+  .envelope.open .env-flap { transform: rotateX(180deg); z-index: 0; }
+  .envelope.open .env-seal { opacity: 0; transform: translateX(-50%) scale(.5); }
+  .envelope.open .env-letter { transform: translateY(-72px); }
+  .env-tip { margin-top: 26px; color: var(--muted); font-size: .85rem; letter-spacing: .2em; }
+
+  /* ---------- Letter ---------- */
+  .letter { display: none; margin-top: 30px; }
+  .letter.show { display: block; animation: rise .9s ease both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+  .letter-card {
+    background: rgba(255, 253, 247, .97); color: #43303c; border-radius: 18px;
+    padding: 38px 30px; line-height: 2.05; font-size: 1.03rem; text-align: left;
+    box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  }
+  .letter-card h3 { color: var(--rose-deep); font-size: 1.3rem; margin-bottom: 18px; letter-spacing: .1em; }
+  .letter-card p { margin-bottom: 14px; }
+  .letter-card p:last-child { margin-bottom: 0; }
+  .letter-card .hl { color: var(--rose-deep); font-weight: 700; }
+  .letter-card .sign-off { text-align: right; color: #8a6f7d; margin-top: 20px; }
+
+  /* ---------- Question ---------- */
+  .question { display: none; text-align: center; margin-top: 64px; }
+  .question.show { display: block; animation: rise .9s ease both; }
+  .question h2 { font-size: clamp(1.5rem, 6vw, 2.1rem); font-weight: 500; letter-spacing: .08em; line-height: 1.5; margin-bottom: 12px; }
+  .question h2 span { color: var(--rose); }
+  .question p { color: var(--muted); margin-bottom: 30px; }
+  .btns { position: relative; height: 72px; }
+  button { border: none; cursor: pointer; border-radius: 999px; font-family: inherit; font-size: 1.12rem; padding: 16px 40px; transition: transform .2s, box-shadow .2s; }
+  #yes {
+    background: linear-gradient(135deg, #ff8fab, var(--rose-deep)); color: #fff;
+    box-shadow: 0 10px 30px rgba(229, 72, 107, .55);
+  }
+  #yes:hover { transform: scale(1.07); }
+  #no {
+    background: rgba(255,255,255,.08); color: var(--ink);
+    border: 1px solid rgba(255,255,255,.25); backdrop-filter: blur(6px);
+    position: absolute; left: 63%; top: 0;
+  }
+
+  /* ---------- Finale ---------- */
+  .finale { display: none; text-align: center; margin-top: 64px; }
+  .finale.show { display: block; animation: rise 1s ease both; }
+  .finale .big { font-size: clamp(2rem, 9vw, 3.2rem); letter-spacing: .1em; line-height: 1.4; margin-bottom: 16px; }
+  .finale .big span { color: var(--rose); }
+  .finale p { color: var(--muted); line-height: 2; }
+  .finale .wish { margin-top: 22px; color: var(--gold); letter-spacing: .2em; }
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .fade-up.in { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
-<canvas id="hearts"></canvas>
+<canvas id="stars"></canvas>
+<canvas id="fx"></canvas>
+
 <div class="wrap">
-  <div class="big-heart">❤</div>
-  <h1>瑶瑶，我想对你说</h1>
-  <p class="subtitle">这个页面，是我专门为你做的</p>
+  <section class="hero">
+    <div class="to">TO · 瑶瑶</div>
+    <h1>瑶瑶</h1>
+    <div class="line"></div>
+    <p>有一句话，藏了很久。<br />今天，不想再藏着了——<br />想认认真真地，告诉你。</p>
+    <div class="scroll-hint">向下滑动 · 有一封信给你 ↓</div>
+  </section>
 
-  <div class="story">
-    <p>以前的我，一直是一个人生活，享受着孤独，也憧憬着爱情。</p>
-    <p>一个人的长廊，一个人的山岗，一个人的地铁，一个人的游乐场——但我依然乐观，微笑着，等待着。</p>
-    <p>直到有一天，我遇见了你，<span class="highlight">瑶瑶</span>。</p>
-    <p>你的出现，让我的世界一下子有了颜色。跟你在一起的每一天，连平平无奇的日子都变得值得期待。</p>
-    <p>我想和你一起去很多地方玩，一起吃遍好吃的东西，一起把平凡的日子过成值得纪念的日子。</p>
-    <p>比时间多一秒就是永远——<span class="highlight">我想把这个永远，留给你。</span></p>
-  </div>
+  <section class="env-stage fade-up">
+    <h2>一封写给你的信</h2>
+    <p>点一下信封，把它打开</p>
+    <div class="envelope" id="envelope">
+      <div class="env-body"></div>
+      <div class="env-letter">瑶瑶：<br />见字如面。<br />有些话当面说不出口，<br />就让这封信替我说——<br /><b>你愿意往下看吗？</b></div>
+      <div class="env-flap"></div>
+      <div class="env-seal">❤</div>
+    </div>
+    <div class="env-tip">点 击 信 封</div>
+  </section>
 
-  <div class="question" id="question">
-    <h2>瑶瑶，你愿意一直陪着我吗？</h2>
+  <section class="letter" id="letter">
+    <div class="letter-card">
+      <h3>瑶瑶，见字如面</h3>
+      <p>以前的我，一直是一个人生活，享受着孤独，也憧憬着爱情。一个人的长廊，一个人的山岗，一个人的地铁，一个人的游乐场——但我依然乐观，微笑着，等待着。</p>
+      <p>直到有一天，我遇见了你，<span class="hl">瑶瑶</span>。你的出现，让我的世界一下子有了颜色。跟你在一起的每一天，连平平无奇的日子都变得值得期待。</p>
+      <p>我想和你一起去很多地方玩，一起吃遍好吃的东西，一起把平凡的日子，过成值得纪念的日子。</p>
+      <p>比时间多一秒就是永远——<span class="hl">我想把这个永远，留给你。</span></p>
+      <p class="sign-off">愿你每天都开开心心 ❤</p>
+    </div>
+  </section>
+
+  <section class="question" id="question">
+    <h2>瑶瑶，你愿意<br /><span>一直陪着我吗？</span></h2>
     <p>认真想想再回答哦（不过有一个按钮好像不太听话）</p>
     <div class="btns">
       <button id="yes">愿意 ❤</button>
       <button id="no">不愿意</button>
     </div>
-  </div>
+  </section>
 
-  <div id="result">
-    <h2>我就知道！❤</h2>
-    <p>瑶瑶，谢谢你愿意陪着我。<br />余生很长，我想和你一起走。<br />以后的每一个纪念日，都有我陪你过。</p>
-  </div>
-
-  <p class="sign">愿你每天都开开心心 ❤</p>
+  <section class="finale" id="finale">
+    <div class="big">我就知道<br /><span>余生请多指教 ❤</span></div>
+    <p>瑶瑶，谢谢你愿意陪着我。<br />以后的每一个纪念日，都有我陪你过。</p>
+    <p class="wish">愿你每天都开开心心</p>
+  </section>
 </div>
 
 <script is:inline>
-  // 飘落的爱心
-  var canvas = document.getElementById('hearts');
-  var ctx = canvas.getContext('2d');
-  var W, H, hearts = [];
+  // ---------- 星空 ----------
+  var sc = document.getElementById('stars');
+  var sctx = sc.getContext('2d');
+  var W, H, stars = [];
   function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
+    W = sc.width = window.innerWidth;
+    H = sc.height = window.innerHeight;
+    var fx = document.getElementById('fx');
+    fx.width = W; fx.height = H;
   }
   window.addEventListener('resize', resize);
   resize();
-  function newHeart() {
-    return {
-      x: Math.random() * W,
-      y: -20,
-      s: 10 + Math.random() * 18,
-      v: 0.6 + Math.random() * 1.4,
-      o: 0.35 + Math.random() * 0.5,
-      w: Math.random() * 1.5
-    };
+  for (var i = 0; i < 130; i++) {
+    stars.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.6 + .3, p: Math.random() * Math.PI * 2, s: .005 + Math.random() * .02 });
   }
-  for (var i = 0; i < 28; i++) {
-    var h = newHeart();
-    h.y = Math.random() * H;
-    hearts.push(h);
-  }
-  function drawHeart(x, y, s, o) {
-    ctx.save();
-    ctx.globalAlpha = o;
-    ctx.fillStyle = '#ff5c7a';
-    ctx.translate(x, y);
-    ctx.scale(s / 16, s / 16);
-    ctx.beginPath();
-    ctx.moveTo(0, 5);
-    ctx.bezierCurveTo(-9, -4, -4, -12, 0, -5);
-    ctx.bezierCurveTo(4, -12, 9, -4, 0, 5);
-    ctx.fill();
-    ctx.restore();
-  }
-  (function loop() {
-    ctx.clearRect(0, 0, W, H);
-    for (var i = 0; i < hearts.length; i++) {
-      var h = hearts[i];
-      h.y += h.v;
-      h.x += Math.sin((h.y / 60) + h.w) * 0.6;
-      if (h.y > H + 20) hearts[i] = newHeart();
-      drawHeart(h.x, h.y, h.s, h.o);
+  (function starLoop() {
+    sctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < stars.length; i++) {
+      var st = stars[i];
+      st.p += st.s;
+      var a = .35 + Math.abs(Math.sin(st.p)) * .65;
+      sctx.globalAlpha = a;
+      sctx.fillStyle = '#ffe9f0';
+      sctx.beginPath();
+      sctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+      sctx.fill();
     }
-    requestAnimationFrame(loop);
+    sctx.globalAlpha = 1;
+    requestAnimationFrame(starLoop);
   })();
 
-  // “不愿意”按钮会跑开
+  // ---------- 滚动淡入 ----------
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll('.fade-up').forEach(function (el) { io.observe(el); });
+
+  // ---------- 开信封 ----------
+  var opened = false;
+  document.getElementById('envelope').addEventListener('click', function () {
+    if (opened) return;
+    opened = true;
+    this.classList.add('open');
+    setTimeout(function () {
+      document.getElementById('letter').classList.add('show');
+      document.getElementById('letter').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 1100);
+    setTimeout(function () {
+      document.getElementById('question').classList.add('show');
+    }, 2100);
+  });
+
+  // ---------- “不愿意”会跑 ----------
   var noBtn = document.getElementById('no');
   function dodge() {
-    var x = Math.random() * 70;
-    var y = Math.random() * 120 - 20;
-    noBtn.style.left = x + '%';
-    noBtn.style.top = y + 'px';
+    noBtn.style.left = (Math.random() * 68) + '%';
+    noBtn.style.top = (Math.random() * 110 - 20) + 'px';
   }
   noBtn.addEventListener('mouseenter', dodge);
   noBtn.addEventListener('touchstart', function (e) { e.preventDefault(); dodge(); });
   noBtn.addEventListener('click', dodge);
 
-  // 点“愿意”：撒花 + 揭晓
+  // ---------- 烟花 ----------
+  var fx = document.getElementById('fx');
+  var fctx = fx.getContext('2d');
+  var parts = [];
+  function burst(x, y) {
+    var colors = ['#ff7d9c', '#ffd166', '#e8c39a', '#ff5c7a', '#ffffff'];
+    for (var i = 0; i < 70; i++) {
+      var ang = Math.random() * Math.PI * 2;
+      var sp = 2 + Math.random() * 6;
+      parts.push({
+        x: x, y: y,
+        vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp,
+        life: 60 + Math.random() * 40,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        size: 2 + Math.random() * 3
+      });
+    }
+  }
+  (function fxLoop() {
+    fctx.clearRect(0, 0, W, H);
+    parts = parts.filter(function (p) { return p.life > 0; });
+    parts.forEach(function (p) {
+      p.x += p.vx; p.y += p.vy; p.vy += .08; p.life--;
+      fctx.globalAlpha = Math.max(p.life / 80, 0);
+      fctx.fillStyle = p.color;
+      fctx.beginPath();
+      fctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      fctx.fill();
+    });
+    fctx.globalAlpha = 1;
+    requestAnimationFrame(fxLoop);
+  })();
+
   document.getElementById('yes').addEventListener('click', function () {
     document.getElementById('question').style.display = 'none';
-    var result = document.getElementById('result');
-    result.style.display = 'block';
-    for (var i = 0; i < 40; i++) {
-      var h = newHeart();
-      h.y = H * 0.7;
-      h.x = W / 2 + (Math.random() - 0.5) * 300;
-      h.v = -(1 + Math.random() * 2);
-      hearts.push(h);
-    }
-    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    var fin = document.getElementById('finale');
+    fin.classList.add('show');
+    fx.style.display = 'block';
+    var cx = W / 2, cy = H * .35;
+    burst(cx, cy);
+    setTimeout(function () { burst(cx - 130, cy + 60); }, 350);
+    setTimeout(function () { burst(cx + 130, cy + 60); }, 650);
+    setTimeout(function () { burst(cx, cy - 40); }, 950);
+    fin.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 </script>
 </body>
