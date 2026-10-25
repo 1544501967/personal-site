@@ -47,7 +47,9 @@
       #response { max-width: 550px; margin: 30px auto 0; }
       #response:empty { display: none; }
       footer { display: flex; justify-content: space-between; padding: 28px 6vw; font-size: 10px; color: var(--muted); letter-spacing: .12em; }
-      .photo { margin-top: 38px; }
+      .photo { margin: 38px 0 0; }
+      .memory img { width: 100%; height: auto; box-shadow: none; }
+      .memory figcaption { letter-spacing: .06em; line-height: 1.9; }
       .photo img { display: block; width: min(420px, 100%); border: 1px solid #d7dacd; box-shadow: 0 18px 40px rgba(52, 59, 53, .14); }
       .photo figcaption { margin-top: 14px; font-size: 12px; letter-spacing: .18em; color: var(--muted); }
       @media (max-width: 640px) { header { padding-top: 22px; } .hero { padding-top: 50px; } h1 { font-size: clamp(43px, 10vw, 64px); margin: 32px 0; } .intro { font-size: 14px; } .chapter { grid-template-columns: 1fr; gap: 35px; padding: 70px 0; } .label span { display: inline; margin-left: 20px; } .hero-bottom { margin-top: 60px; } .date { font-size: 44px; } .copy p { font-size: 15px; } .invitation { padding: 80px 6vw; } footer { font-size: 9px; } }
@@ -90,20 +92,33 @@
           <p>你经常熬夜。我已经睡着了，你还在刷抖音，看到想分享的内容，就发给我。</p>
           <p>等我醒来，再一条条看。我们没有同时看见，却还是这样分享了同一个东西。</p>
           <p>我喜欢收到你的分享。那些视频让我知道，你又觉得什么有意思，也让我觉得，自己被你想起了。</p>
+          <p>还有你发来的这些话，从“能不能做好了寄到学校”，一直聊到姑姑做的牛肉酱。话题可以跳来跳去，我还是想一条条听你说。</p>
           <p>不过，小宝宝，喜欢的视频留到明天也可以。想看你的消息，也想你好好睡一觉。</p>
+          <figure class="photo memory"><img src="/memories/shared-messages.jpg" alt="瑶瑶分享的聊天内容，聊到把做好的食物寄到学校和姑姑做的牛肉酱" loading="lazy" /><figcaption class="sans">你发来的零零碎碎，我都有认真看。</figcaption></figure>
         </div>
       </section>
       <section class="chapter">
-        <div class="label sans">04 / 同一片天空<span>来自湖南的分享</span></div>
+        <div class="label sans">04 / 同一片天空<span>你那边的好天气</span></div>
         <div class="copy">
-          <h2>湖南的天空很好看。<br />谢谢你，也让我看见。</h2>
-          <p>你会给我分享湖南好看的天空。隔着屏幕，我也能看一看你眼里的风景。</p>
+          <h2>你那边的天空很好看。<br />谢谢你，也让我看见。</h2>
+          <p>你会给我分享你那边好看的天空。隔着屏幕，我也能看一看你眼里的风景。</p>
           <p>我喜欢这样的时刻：你觉得好看，然后想到了我。于是，你那边的一点日常，也到了我这里。</p>
           <p>慢慢地，想看的不只是你发来的天空。也想有一天站在你旁边，听你叫一声哥哥，再一起抬头看看。</p>
+          <figure class="photo memory"><img src="/memories/shared-sky.jpg" alt="瑶瑶分享的蓝天白云，天空下是红色屋顶的建筑" loading="lazy" /><figcaption class="sans">这一天的云，也被你分享到了我这里。</figcaption></figure>
         </div>
       </section>
       <section class="chapter">
-        <div class="label sans">05 / 下一次<span>想把分享变成一起</span></div>
+        <div class="label sans">05 / 好好吃饭<span>你分享的另一种日常</span></div>
+        <div class="copy">
+          <h2>今天吃了什么，<br />也想听你告诉我。</h2>
+          <p>你会把吃过的好吃的拍给我看。有小吃，有满满一桌菜，也有一碗拌好的粉。原本只是你的一顿饭，发过来以后，也成了我们能聊上几句的小事。</p>
+          <p>看着这些照片，我也开始好奇：哪一样最好吃，哪一家你还想再去？</p>
+          <p>先把这些好吃的记下来。下次有机会，你带路，我们一起吃。你也可以当面告诉我：“哥哥，尝尝这个。”</p>
+          <figure class="photo memory"><img src="/memories/shared-food.jpg" alt="瑶瑶在聊天中分享的小吃、一桌饭菜和一碗拌粉" loading="lazy" /><figcaption class="sans">从“给你看看我吃的”，到“下次一起吃”。</figcaption></figure>
+        </div>
+      </section>
+      <section class="chapter">
+        <div class="label sans">06 / 下一次<span>想把分享变成一起</span></div>
         <div class="copy">
           <h2>你说过的小事，<br />我都想有机会参与。</h2>
           <div class="moments">
@@ -114,7 +129,7 @@
         </div>
       </section>
       <section class="invitation" aria-labelledby="invitation-title">
-        <div class="eyebrow sans">06 / 想认真告诉你</div><h2 id="invitation-title">小宝宝，我喜欢你。<br />想再靠近你一点。</h2><p>喜欢叫我哥哥的你，也喜欢说到做到的你。<br />如果你也愿意，我们就慢慢走进彼此的生活。</p>
+        <div class="eyebrow sans">07 / 想认真告诉你</div><h2 id="invitation-title">小宝宝，我喜欢你。<br />想再靠近你一点。</h2><p>喜欢叫我哥哥的你，也喜欢说到做到的你。<br />如果你也愿意，我们就慢慢走进彼此的生活。</p>
         <div class="actions"><button type="button" id="yes">好呀，慢慢来</button><button type="button" class="secondary" id="later">让我想一想</button></div>
         <p id="response" role="status" aria-live="polite"></p>
       </section>
