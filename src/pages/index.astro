@@ -1,370 +1,88 @@
+<!doctype html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>给瑶瑶的一封信</title>
-<style is:inline>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --rose: #ff7d9c;
-    --rose-deep: #e5486b;
-    --gold: #e8c39a;
-    --ink: #f5efe8;
-    --muted: #b9aeb8;
-  }
-  body {
-    font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
-    background: radial-gradient(1200px 800px at 80% -10%, #3b2b58 0%, transparent 60%),
-                radial-gradient(900px 700px at 10% 110%, #57294a 0%, transparent 55%),
-                linear-gradient(180deg, #14101f 0%, #1d1530 55%, #241a33 100%);
-    color: var(--ink);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  #stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-  #fx { position: fixed; inset: 0; z-index: 5; pointer-events: none; display: none; }
-  .wrap { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 22px 90px; }
-
-  /* ---------- Hero ---------- */
-  .hero { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-  .to { letter-spacing: .55em; text-indent: .55em; font-size: .85rem; color: var(--gold); margin-bottom: 26px; }
-  .hero h1 {
-    font-size: clamp(3.2rem, 14vw, 6rem);
-    font-weight: 600; line-height: 1.15; letter-spacing: .12em; text-indent: .12em;
-    background: linear-gradient(135deg, #fff 20%, #ffd9e4 45%, var(--rose) 70%, var(--gold) 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    text-shadow: 0 0 60px rgba(255, 125, 156, .25);
-  }
-  .hero .line { width: 56px; height: 1px; background: var(--gold); opacity: .7; margin: 30px 0 22px; }
-  .hero p { color: var(--muted); font-size: 1.02rem; line-height: 2; max-width: 26em; }
-  .meet { margin-top: 30px; color: var(--gold); font-size: .9rem; letter-spacing: .4em; text-indent: .4em; }
-  .scroll-hint { margin-top: 48px; color: var(--gold); font-size: .85rem; letter-spacing: .3em; text-indent: .3em; animation: floaty 2.4s ease-in-out infinite; }
-  @keyframes floaty { 0%, 100% { transform: translateY(0); opacity: .9; } 50% { transform: translateY(8px); opacity: .5; } }
-
-  /* ---------- Skystar ---------- */
-  .skystar { position: relative; min-height: 100svh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 0 -22px; padding: 0 22px; }
-  .skystar .glow {
-    position: absolute; left: 50%; bottom: 110px; transform: translateX(-50%);
-    width: 110%; height: 300px; pointer-events: none;
-    background: radial-gradient(ellipse at center, rgba(255, 150, 80, .32) 0%, rgba(255, 120, 90, .12) 45%, transparent 70%);
-  }
-  .skystar .mountains { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 150px; pointer-events: none; }
-  .rain {
-    position: absolute; top: 0; writing-mode: vertical-rl; white-space: nowrap;
-    font-size: 1rem; letter-spacing: .4em; color: rgba(255, 255, 255, .55);
-    animation: rainFall linear infinite; opacity: 0; pointer-events: none;
-  }
-  @keyframes rainFall {
-    0% { transform: translateY(-110%); opacity: 0; }
-    12% { opacity: .65; }
-    85% { opacity: .65; }
-    100% { transform: translateY(105vh); opacity: 0; }
-  }
-  .skystar .small { color: var(--gold); letter-spacing: .6em; text-indent: .6em; font-size: .9rem; margin-bottom: 22px; }
-  .skystar h2 {
-    font-size: clamp(1.6rem, 7vw, 2.6rem); font-weight: 600; line-height: 1.6; letter-spacing: .08em;
-    background: linear-gradient(135deg, #fff 15%, #ffd9e4 50%, var(--rose) 85%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    text-shadow: 0 0 50px rgba(255, 125, 156, .3);
-  }
-  .skystar h2 span { display: block; }
-  .skystar .hint { margin-top: 56px; color: var(--muted); font-size: .85rem; letter-spacing: .3em; text-indent: .3em; }
-
-  /* ---------- Envelope ---------- */
-  .env-stage { padding: 60px 0 10px; text-align: center; }
-  .env-stage h2 { font-size: 1.35rem; font-weight: 500; letter-spacing: .15em; margin-bottom: 10px; }
-  .env-stage p { color: var(--muted); font-size: .95rem; margin-bottom: 34px; }
-  .envelope { position: relative; width: min(340px, 84vw); height: 220px; margin: 0 auto; cursor: pointer; perspective: 900px; }
-  .env-body {
-    position: absolute; inset: 0; border-radius: 10px;
-    background: linear-gradient(160deg, #f7e8ec, #efd3da);
-    box-shadow: 0 24px 60px rgba(0,0,0,.45);
-    overflow: hidden;
-  }
-  .env-body:before, .env-body:after {
-    content: ""; position: absolute; left: 0; right: 0; top: 0; bottom: 0;
-    background: linear-gradient(160deg, rgba(255,255,255,.5), rgba(255,255,255,0) 55%);
-  }
-  .env-letter {
-    position: absolute; left: 14px; right: 14px; top: 12px; height: 180px; border-radius: 6px;
-    background: #fffdf7; color: #4a3542; padding: 20px 18px; text-align: left;
-    font-size: .95rem; line-height: 1.9;
-    box-shadow: 0 4px 16px rgba(0,0,0,.15);
-    transition: transform 1s ease .25s;
-  }
-  .env-letter b { color: var(--rose-deep); }
-  .env-flap {
-    position: absolute; left: 0; right: 0; top: 0; height: 130px; z-index: 2;
-    background: linear-gradient(180deg, #f3d7de, #eac3cd);
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    transform-origin: top center;
-    transition: transform .8s ease;
-    border-radius: 10px 10px 0 0;
-  }
-  .env-seal {
-    position: absolute; left: 50%; top: 108px; transform: translateX(-50%); z-index: 3;
-    width: 52px; height: 52px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #ff9db1, var(--rose-deep));
-    color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px;
-    box-shadow: 0 6px 18px rgba(229, 72, 107, .5);
-    transition: opacity .4s, transform .4s;
-  }
-  .envelope.open .env-flap { transform: rotateX(180deg); z-index: 0; }
-  .envelope.open .env-seal { opacity: 0; transform: translateX(-50%) scale(.5); }
-  .envelope.open .env-letter { transform: translateY(-72px); }
-  .env-tip { margin-top: 26px; color: var(--muted); font-size: .85rem; letter-spacing: .2em; }
-
-  /* ---------- Letter ---------- */
-  .letter { display: none; margin-top: 30px; }
-  .letter.show { display: block; animation: rise .9s ease both; }
-  @keyframes rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
-  .letter-card {
-    background: rgba(255, 253, 247, .97); color: #43303c; border-radius: 18px;
-    padding: 38px 30px; line-height: 2.05; font-size: 1.03rem; text-align: left;
-    box-shadow: 0 30px 80px rgba(0,0,0,.5);
-  }
-  .letter-card h3 { color: var(--rose-deep); font-size: 1.3rem; margin-bottom: 18px; letter-spacing: .1em; }
-  .letter-card p { margin-bottom: 14px; }
-  .letter-card p:last-child { margin-bottom: 0; }
-  .letter-card .hl { color: var(--rose-deep); font-weight: 700; }
-  .letter-card .sign-off { text-align: right; color: #8a6f7d; margin-top: 20px; }
-
-  /* ---------- Question ---------- */
-  .question { display: none; text-align: center; margin-top: 64px; }
-  .question.show { display: block; animation: rise .9s ease both; }
-  .question h2 { font-size: clamp(1.5rem, 6vw, 2.1rem); font-weight: 500; letter-spacing: .08em; line-height: 1.5; margin-bottom: 12px; }
-  .question h2 span { color: var(--rose); }
-  .question p { color: var(--muted); margin-bottom: 30px; }
-  .btns { position: relative; height: 72px; }
-  button { border: none; cursor: pointer; border-radius: 999px; font-family: inherit; font-size: 1.12rem; padding: 16px 40px; transition: transform .2s, box-shadow .2s; }
-  #yes {
-    background: linear-gradient(135deg, #ff8fab, var(--rose-deep)); color: #fff;
-    box-shadow: 0 10px 30px rgba(229, 72, 107, .55);
-  }
-  #yes:hover { transform: scale(1.07); }
-  #no {
-    background: rgba(255,255,255,.08); color: var(--ink);
-    border: 1px solid rgba(255,255,255,.25); backdrop-filter: blur(6px);
-    position: absolute; left: 63%; top: 0;
-  }
-
-  /* ---------- Finale ---------- */
-  .finale { display: none; text-align: center; margin-top: 64px; }
-  .finale.show { display: block; animation: rise 1s ease both; }
-  .finale .big { font-size: clamp(2rem, 9vw, 3.2rem); letter-spacing: .1em; line-height: 1.4; margin-bottom: 16px; }
-  .finale .big span { color: var(--rose); }
-  .finale p { color: var(--muted); line-height: 2; }
-  .finale .wish { margin-top: 22px; color: var(--gold); letter-spacing: .2em; }
-  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
-  .fade-up.in { opacity: 1; transform: translateY(0); }
-  @media (max-width: 560px) {
-    .rain.hide-m { display: none; }
-  }
-</style>
-</head>
-<body>
-<canvas id="stars"></canvas>
-<canvas id="fx"></canvas>
-
-<div class="wrap">
-  <section class="hero">
-    <div class="to">TO · 瑶瑶</div>
-    <h1>瑶瑶</h1>
-    <div class="line"></div>
-    <p>有一句话，藏了很久。<br />今天，不想再藏着了——<br />想认认真真地，告诉你。</p>
-    <div class="meet">10 · 15 · 相遇于抖音</div>
-    <div class="scroll-hint">向下滑动 · 整片星空为你闪烁 ↓</div>
-  </section>
-
-  <section class="skystar fade-up">
-    <div class="glow"></div>
-    <div class="rain" style="left: 4%; animation-duration: 17s; animation-delay: -2s;">今晚整片星空将为你一人闪烁</div>
-    <div class="rain hide-m" style="left: 17%; animation-duration: 23s; animation-delay: -11s;">遇见你是最美的意外</div>
-    <div class="rain hide-m" style="right: 17%; animation-duration: 20s; animation-delay: -6s;">从抖音到余生</div>
-    <div class="rain" style="right: 4%; animation-duration: 15s; animation-delay: -9s;">瑶瑶我喜欢你</div>
-    <svg class="mountains" viewBox="0 0 1440 150" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,150 L0,95 L120,55 L210,90 L320,35 L430,85 L540,50 L650,100 L760,45 L880,90 L990,55 L1100,95 L1210,40 L1330,85 L1440,60 L1440,150 Z" fill="#0a0616" />
-    </svg>
-    <div style="position: relative;">
-      <div class="small">今 晚</div>
-      <h2><span>瑶瑶，</span><span>整片星空只为你闪烁</span></h2>
-      <div class="hint">继续向下 · 还有一封信给你</div>
-    </div>
-  </section>
-
-  <section class="env-stage fade-up">
-    <h2>一封写给你的信</h2>
-    <p>点一下信封，把它打开</p>
-    <div class="envelope" id="envelope">
-      <div class="env-body"></div>
-      <div class="env-letter">瑶瑶：<br />见字如面。<br />有些话当面说不出口，<br />就让这封信替我说——<br /><b>你愿意往下看吗？</b></div>
-      <div class="env-flap"></div>
-      <div class="env-seal">❤</div>
-    </div>
-    <div class="env-tip">点 击 信 封</div>
-  </section>
-
-  <section class="letter" id="letter">
-    <div class="letter-card">
-      <h3>瑶瑶，见字如面</h3>
-      <p>以前的我，一直是一个人生活，享受着孤独，也憧憬着爱情。一个人的长廊，一个人的山岗，一个人的地铁，一个人的游乐场——但我依然乐观，微笑着，等待着。</p>
-      <p>10月15日，在抖音上，我遇见了你，<span class="hl">瑶瑶</span>。你的出现，让我的世界一下子有了颜色。跟你在一起的每一天，连平平无奇的日子都变得值得期待。</p>
-      <p>我想和你一起去很多地方玩，一起吃遍好吃的东西，一起把平凡的日子，过成值得纪念的日子。</p>
-      <p>比时间多一秒就是永远——<span class="hl">我想把这个永远，留给你。</span></p>
-      <p class="sign-off">愿你每天都开开心心 ❤</p>
-    </div>
-  </section>
-
-  <section class="question" id="question">
-    <h2>瑶瑶，你愿意<br /><span>一直陪着我吗？</span></h2>
-    <p>认真想想再回答哦（不过有一个按钮好像不太听话）</p>
-    <div class="btns">
-      <button id="yes">愿意 ❤</button>
-      <button id="no">不愿意</button>
-    </div>
-  </section>
-
-  <section class="finale" id="finale">
-    <div class="big">我就知道<br /><span>余生请多指教 ❤</span></div>
-    <p>瑶瑶，谢谢你愿意陪着我。<br />以后的每一个纪念日，都有我陪你过。</p>
-    <p class="wish">愿你每天都开开心心</p>
-  </section>
-</div>
-
-<script is:inline>
-  // ---------- 星空 + 流星 ----------
-  var sc = document.getElementById('stars');
-  var sctx = sc.getContext('2d');
-  var W, H, stars = [], meteors = [], nextMeteor = 0;
-  function resize() {
-    W = sc.width = window.innerWidth;
-    H = sc.height = window.innerHeight;
-    var fx = document.getElementById('fx');
-    fx.width = W; fx.height = H;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-  for (var i = 0; i < 130; i++) {
-    stars.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.6 + .3, p: Math.random() * Math.PI * 2, s: .005 + Math.random() * .02 });
-  }
-  function spawnMeteor(now) {
-    meteors.push({
-      x: W * (.35 + Math.random() * .65),
-      y: H * Math.random() * .3,
-      vx: -(6 + Math.random() * 4),
-      vy: 3 + Math.random() * 2,
-      life: 1
-    });
-    nextMeteor = now + 2500 + Math.random() * 4000;
-  }
-  (function starLoop(now) {
-    sctx.clearRect(0, 0, W, H);
-    for (var i = 0; i < stars.length; i++) {
-      var st = stars[i];
-      st.p += st.s;
-      var a = .35 + Math.abs(Math.sin(st.p)) * .65;
-      sctx.globalAlpha = a;
-      sctx.fillStyle = '#ffe9f0';
-      sctx.beginPath();
-      sctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
-      sctx.fill();
-    }
-    sctx.globalAlpha = 1;
-    if (now > nextMeteor) spawnMeteor(now);
-    meteors = meteors.filter(function (m) { return m.life > 0 && m.x > -100 && m.y < H + 100; });
-    meteors.forEach(function (m) {
-      m.x += m.vx; m.y += m.vy; m.life -= .012;
-      var grad = sctx.createLinearGradient(m.x, m.y, m.x - m.vx * 10, m.y - m.vy * 10);
-      grad.addColorStop(0, 'rgba(255, 240, 245,' + Math.max(m.life, 0) + ')');
-      grad.addColorStop(1, 'rgba(255, 240, 245, 0)');
-      sctx.strokeStyle = grad;
-      sctx.lineWidth = 1.6;
-      sctx.beginPath();
-      sctx.moveTo(m.x, m.y);
-      sctx.lineTo(m.x - m.vx * 10, m.y - m.vy * 10);
-      sctx.stroke();
-    });
-    requestAnimationFrame(starLoop);
-  })(0);
-
-  // ---------- 滚动淡入 ----------
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, { threshold: .15 });
-  document.querySelectorAll('.fade-up').forEach(function (el) { io.observe(el); });
-
-  // ---------- 开信封 ----------
-  var opened = false;
-  document.getElementById('envelope').addEventListener('click', function () {
-    if (opened) return;
-    opened = true;
-    this.classList.add('open');
-    setTimeout(function () {
-      document.getElementById('letter').classList.add('show');
-      document.getElementById('letter').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 1100);
-    setTimeout(function () {
-      document.getElementById('question').classList.add('show');
-    }, 2100);
-  });
-
-  // ---------- “不愿意”会跑 ----------
-  var noBtn = document.getElementById('no');
-  function dodge() {
-    noBtn.style.left = (Math.random() * 68) + '%';
-    noBtn.style.top = (Math.random() * 110 - 20) + 'px';
-  }
-  noBtn.addEventListener('mouseenter', dodge);
-  noBtn.addEventListener('touchstart', function (e) { e.preventDefault(); dodge(); });
-  noBtn.addEventListener('click', dodge);
-
-  // ---------- 烟花 ----------
-  var fx = document.getElementById('fx');
-  var fctx = fx.getContext('2d');
-  var parts = [];
-  function burst(x, y) {
-    var colors = ['#ff7d9c', '#ffd166', '#e8c39a', '#ff5c7a', '#ffffff'];
-    for (var i = 0; i < 70; i++) {
-      var ang = Math.random() * Math.PI * 2;
-      var sp = 2 + Math.random() * 6;
-      parts.push({
-        x: x, y: y,
-        vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp,
-        life: 60 + Math.random() * 40,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        size: 2 + Math.random() * 3
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="瑶瑶，从十月十五日开始，想和你慢慢走近。" />
+    <title>从那天起 · 瑶瑶</title>
+    <style is:inline>
+      :root { color-scheme: light; --paper: #f3f1eb; --ink: #343b35; --muted: #787e75; --accent: #69745d; }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { margin: 0; background: var(--paper); color: var(--ink); font-family: "Songti SC", "STSong", "Noto Serif SC", serif; -webkit-font-smoothing: antialiased; }
+      ::selection { background: #d8decc; }
+      a { color: inherit; text-decoration: none; }
+      .sans { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; }
+      header { display: flex; justify-content: space-between; align-items: center; padding: 30px 6vw; font-size: 11px; letter-spacing: .18em; color: var(--muted); }
+      header a { padding: 10px 0; border-bottom: 1px solid #b9beb0; }
+      main { width: min(1080px, 88vw); margin: auto; }
+      .hero { min-height: calc(100svh - 100px); display: flex; flex-direction: column; justify-content: center; position: relative; padding: 75px 0 110px; }
+      .eyebrow { color: var(--accent); font-size: 12px; letter-spacing: .28em; }
+      h1 { font-weight: 400; font-size: clamp(55px, 8.5vw, 112px); line-height: 1.38; letter-spacing: -.03em; margin: 30px 0; }
+      h1 em { font-style: normal; color: var(--accent); }
+      .intro { color: var(--muted); font-size: 15px; line-height: 2.2; margin: 0; }
+      .hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 70px; font-size: 11px; letter-spacing: .15em; color: var(--muted); }
+      .date { font-size: 56px; font-weight: 300; letter-spacing: -.06em; line-height: 1; color: var(--accent); }
+      .date small { display: block; font-size: 10px; letter-spacing: .18em; margin-top: 15px; }
+      .chapter { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; padding: 110px 0; border-top: 1px solid #d7dacd; }
+      .label { font-size: 11px; letter-spacing: .15em; color: var(--muted); line-height: 2; }
+      .label span { display: block; margin-top: 12px; }
+      h2 { font-size: clamp(29px, 4vw, 46px); font-weight: 400; line-height: 1.65; margin: 0 0 30px; }
+      .copy { max-width: 540px; }
+      .copy p { color: var(--muted); font-size: 16px; line-height: 2.3; margin: 0 0 22px; }
+      .moments { margin-top: 45px; }
+      .moment { display: grid; grid-template-columns: 40px 1fr; padding: 23px 0; border-top: 1px solid #d7dacd; }
+      .moment b { font-family: sans-serif; font-size: 10px; font-weight: 400; color: var(--accent); padding-top: 6px; }
+      .moment h3 { font-weight: 400; font-size: 20px; margin: 0 0 9px; }
+      .moment p { font-size: 14px; margin: 0; }
+      .invitation { text-align: center; padding: 110px 20px 120px; background: #e7eadd; margin: 0 calc((min(1080px, 88vw) - 100vw) / 2); }
+      .invitation h2 { margin: 28px 0 20px; }
+      .invitation p { font-size: 14px; color: #727b68; line-height: 2.2; }
+      .actions { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin-top: 38px; }
+      button { font: inherit; font-size: 14px; cursor: pointer; padding: 15px 24px; border: 1px solid #59654f; background: #59654f; color: #f6f5ef; border-radius: 0; transition: background .2s; }
+      button:hover { background: #46533e; }
+      button.secondary { background: transparent; color: #59654f; border-color: transparent; border-bottom-color: #aab29e; }
+      button.secondary:hover { background: #dce1d1; }
+      :focus-visible { outline: 2px solid #59654f; outline-offset: 6px; }
+      #response { max-width: 550px; margin: 30px auto 0; }
+      #response:empty { display: none; }
+      footer { display: flex; justify-content: space-between; padding: 28px 6vw; font-size: 10px; color: var(--muted); letter-spacing: .12em; }
+      @media (max-width: 640px) { header { padding-top: 22px; } .hero { padding-top: 50px; } h1 { font-size: clamp(43px, 10vw, 64px); margin: 32px 0; } .intro { font-size: 14px; } .chapter { grid-template-columns: 1fr; gap: 35px; padding: 70px 0; } .label span { display: inline; margin-left: 20px; } .hero-bottom { margin-top: 60px; } .date { font-size: 44px; } .copy p { font-size: 15px; } .invitation { padding: 80px 6vw; } footer { font-size: 9px; } }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+    </style>
+  </head>
+  <body>
+    <header class="sans"><span>给瑶瑶 · 一点心意</span><a href="#beginning">从那天说起</a></header>
+    <main>
+      <section class="hero" aria-labelledby="title">
+        <div class="eyebrow sans">有些相遇，会让人想按下慢放。</div>
+        <h1 id="title">瑶瑶，<br />想和你，<em>慢慢来。</em></h1>
+        <p class="intro">多聊一点，多了解一点。<br />让屏幕里的相遇，慢慢走进生活里。</p>
+        <div class="hero-bottom sans"><div class="date">10.15<small>在抖音，认识了你</small></div><a href="#beginning">往下看看 ↓</a></div>
+      </section>
+      <section class="chapter" id="beginning">
+        <div class="label sans">01 / 相遇<span>从一个普通的日子开始</span></div>
+        <div class="copy"><h2>原本只是刷到，<br />后来想要认识你。</h2><p>十月十五日，我们在抖音认识。那时还不知道，这个日期会被我记住。</p><p>后来，我开始期待和你聊天。也想知道，屏幕之外的你，喜欢怎样度过一天。</p><p>这些小小的好奇，让我确定了一件事：我想再靠近你一点。</p></div>
+      </section>
+      <section class="chapter">
+        <div class="label sans">02 / 以后<span>想一起做的小事</span></div>
+        <div class="copy"><h2>比起说很远的以后，<br />更想约好下一次。</h2><p>想和你一起做的事，其实都很普通。因为是和你，才开始有了期待。</p><div class="moments"><div class="moment"><b>01</b><div><h3>好好吃一顿饭</h3><p>你来选想吃的，我们慢慢聊。</p></div></div><div class="moment"><b>02</b><div><h3>走一段没有安排的路</h3><p>不用赶时间，看到喜欢的地方就停一停。</p></div></div><div class="moment"><b>03</b><div><h3>分享普通的一天</h3><p>开心的、烦恼的，还有那些没什么要紧的小事。</p></div></div></div></div>
+      </section>
+      <section class="invitation" aria-labelledby="invitation-title">
+        <div class="eyebrow sans">03 / 想认真告诉你</div><h2 id="invitation-title">我喜欢你。<br />也想知道你的心意。</h2><p>如果你也有一点同样的感觉，<br />我们就从下一次见面，慢慢开始。</p>
+        <div class="actions"><button type="button" id="yes">好呀，慢慢来</button><button type="button" class="secondary" id="later">让我想一想</button></div>
+        <p id="response" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+    <footer class="sans"><span>从 10 月 15 日起</span><span>留一些空白，给我们以后。</span></footer>
+    <script>
+      const response = document.querySelector('#response');
+      document.querySelector('#yes')?.addEventListener('click', () => {
+        if (response) response.textContent = '那就约下一次见面吧。也把这句话亲口告诉我，好吗？';
       });
-    }
-  }
-  (function fxLoop() {
-    fctx.clearRect(0, 0, W, H);
-    parts = parts.filter(function (p) { return p.life > 0; });
-    parts.forEach(function (p) {
-      p.x += p.vx; p.y += p.vy; p.vy += .08; p.life--;
-      fctx.globalAlpha = Math.max(p.life / 80, 0);
-      fctx.fillStyle = p.color;
-      fctx.beginPath();
-      fctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      fctx.fill();
-    });
-    fctx.globalAlpha = 1;
-    requestAnimationFrame(fxLoop);
-  })();
-
-  document.getElementById('yes').addEventListener('click', function () {
-    document.getElementById('question').style.display = 'none';
-    var fin = document.getElementById('finale');
-    fin.classList.add('show');
-    fx.style.display = 'block';
-    var cx = W / 2, cy = H * .35;
-    burst(cx, cy);
-    setTimeout(function () { burst(cx - 130, cy + 60); }, 350);
-    setTimeout(function () { burst(cx + 130, cy + 60); }, 650);
-    setTimeout(function () { burst(cx, cy - 40); }, 950);
-    fin.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
-</script>
-</body>
+      document.querySelector('#later')?.addEventListener('click', () => {
+        if (response) response.textContent = '好，按你的节奏来。等你想好了，再告诉我。';
+      });
+    </script>
+  </body>
 </html>
