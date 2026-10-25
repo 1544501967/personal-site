@@ -37,11 +37,41 @@
   }
   .hero .line { width: 56px; height: 1px; background: var(--gold); opacity: .7; margin: 30px 0 22px; }
   .hero p { color: var(--muted); font-size: 1.02rem; line-height: 2; max-width: 26em; }
-  .scroll-hint { margin-top: 52px; color: var(--gold); font-size: .85rem; letter-spacing: .3em; text-indent: .3em; animation: floaty 2.4s ease-in-out infinite; }
+  .meet { margin-top: 30px; color: var(--gold); font-size: .9rem; letter-spacing: .4em; text-indent: .4em; }
+  .scroll-hint { margin-top: 48px; color: var(--gold); font-size: .85rem; letter-spacing: .3em; text-indent: .3em; animation: floaty 2.4s ease-in-out infinite; }
   @keyframes floaty { 0%, 100% { transform: translateY(0); opacity: .9; } 50% { transform: translateY(8px); opacity: .5; } }
 
+  /* ---------- Skystar ---------- */
+  .skystar { position: relative; min-height: 100svh; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 0 -22px; padding: 0 22px; }
+  .skystar .glow {
+    position: absolute; left: 50%; bottom: 110px; transform: translateX(-50%);
+    width: 110%; height: 300px; pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(255, 150, 80, .32) 0%, rgba(255, 120, 90, .12) 45%, transparent 70%);
+  }
+  .skystar .mountains { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 150px; pointer-events: none; }
+  .rain {
+    position: absolute; top: 0; writing-mode: vertical-rl; white-space: nowrap;
+    font-size: 1rem; letter-spacing: .4em; color: rgba(255, 255, 255, .55);
+    animation: rainFall linear infinite; opacity: 0; pointer-events: none;
+  }
+  @keyframes rainFall {
+    0% { transform: translateY(-110%); opacity: 0; }
+    12% { opacity: .65; }
+    85% { opacity: .65; }
+    100% { transform: translateY(105vh); opacity: 0; }
+  }
+  .skystar .small { color: var(--gold); letter-spacing: .6em; text-indent: .6em; font-size: .9rem; margin-bottom: 22px; }
+  .skystar h2 {
+    font-size: clamp(1.6rem, 7vw, 2.6rem); font-weight: 600; line-height: 1.6; letter-spacing: .08em;
+    background: linear-gradient(135deg, #fff 15%, #ffd9e4 50%, var(--rose) 85%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    text-shadow: 0 0 50px rgba(255, 125, 156, .3);
+  }
+  .skystar h2 span { display: block; }
+  .skystar .hint { margin-top: 56px; color: var(--muted); font-size: .85rem; letter-spacing: .3em; text-indent: .3em; }
+
   /* ---------- Envelope ---------- */
-  .env-stage { padding: 40px 0 10px; text-align: center; }
+  .env-stage { padding: 60px 0 10px; text-align: center; }
   .env-stage h2 { font-size: 1.35rem; font-weight: 500; letter-spacing: .15em; margin-bottom: 10px; }
   .env-stage p { color: var(--muted); font-size: .95rem; margin-bottom: 34px; }
   .envelope { position: relative; width: min(340px, 84vw); height: 220px; margin: 0 auto; cursor: pointer; perspective: 900px; }
@@ -127,6 +157,9 @@
   .finale .wish { margin-top: 22px; color: var(--gold); letter-spacing: .2em; }
   .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
   .fade-up.in { opacity: 1; transform: translateY(0); }
+  @media (max-width: 560px) {
+    .rain.hide-m { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -139,7 +172,24 @@
     <h1>瑶瑶</h1>
     <div class="line"></div>
     <p>有一句话，藏了很久。<br />今天，不想再藏着了——<br />想认认真真地，告诉你。</p>
-    <div class="scroll-hint">向下滑动 · 有一封信给你 ↓</div>
+    <div class="meet">10 · 15 · 相遇于抖音</div>
+    <div class="scroll-hint">向下滑动 · 整片星空为你闪烁 ↓</div>
+  </section>
+
+  <section class="skystar fade-up">
+    <div class="glow"></div>
+    <div class="rain" style="left: 4%; animation-duration: 17s; animation-delay: -2s;">今晚整片星空将为你一人闪烁</div>
+    <div class="rain hide-m" style="left: 17%; animation-duration: 23s; animation-delay: -11s;">遇见你是最美的意外</div>
+    <div class="rain hide-m" style="right: 17%; animation-duration: 20s; animation-delay: -6s;">从抖音到余生</div>
+    <div class="rain" style="right: 4%; animation-duration: 15s; animation-delay: -9s;">瑶瑶我喜欢你</div>
+    <svg class="mountains" viewBox="0 0 1440 150" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,150 L0,95 L120,55 L210,90 L320,35 L430,85 L540,50 L650,100 L760,45 L880,90 L990,55 L1100,95 L1210,40 L1330,85 L1440,60 L1440,150 Z" fill="#0a0616" />
+    </svg>
+    <div style="position: relative;">
+      <div class="small">今 晚</div>
+      <h2><span>瑶瑶，</span><span>整片星空只为你闪烁</span></h2>
+      <div class="hint">继续向下 · 还有一封信给你</div>
+    </div>
   </section>
 
   <section class="env-stage fade-up">
@@ -158,7 +208,7 @@
     <div class="letter-card">
       <h3>瑶瑶，见字如面</h3>
       <p>以前的我，一直是一个人生活，享受着孤独，也憧憬着爱情。一个人的长廊，一个人的山岗，一个人的地铁，一个人的游乐场——但我依然乐观，微笑着，等待着。</p>
-      <p>直到有一天，我遇见了你，<span class="hl">瑶瑶</span>。你的出现，让我的世界一下子有了颜色。跟你在一起的每一天，连平平无奇的日子都变得值得期待。</p>
+      <p>10月15日，在抖音上，我遇见了你，<span class="hl">瑶瑶</span>。你的出现，让我的世界一下子有了颜色。跟你在一起的每一天，连平平无奇的日子都变得值得期待。</p>
       <p>我想和你一起去很多地方玩，一起吃遍好吃的东西，一起把平凡的日子，过成值得纪念的日子。</p>
       <p>比时间多一秒就是永远——<span class="hl">我想把这个永远，留给你。</span></p>
       <p class="sign-off">愿你每天都开开心心 ❤</p>
@@ -182,10 +232,10 @@
 </div>
 
 <script is:inline>
-  // ---------- 星空 ----------
+  // ---------- 星空 + 流星 ----------
   var sc = document.getElementById('stars');
   var sctx = sc.getContext('2d');
-  var W, H, stars = [];
+  var W, H, stars = [], meteors = [], nextMeteor = 0;
   function resize() {
     W = sc.width = window.innerWidth;
     H = sc.height = window.innerHeight;
@@ -197,7 +247,17 @@
   for (var i = 0; i < 130; i++) {
     stars.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.6 + .3, p: Math.random() * Math.PI * 2, s: .005 + Math.random() * .02 });
   }
-  (function starLoop() {
+  function spawnMeteor(now) {
+    meteors.push({
+      x: W * (.35 + Math.random() * .65),
+      y: H * Math.random() * .3,
+      vx: -(6 + Math.random() * 4),
+      vy: 3 + Math.random() * 2,
+      life: 1
+    });
+    nextMeteor = now + 2500 + Math.random() * 4000;
+  }
+  (function starLoop(now) {
     sctx.clearRect(0, 0, W, H);
     for (var i = 0; i < stars.length; i++) {
       var st = stars[i];
@@ -210,8 +270,22 @@
       sctx.fill();
     }
     sctx.globalAlpha = 1;
+    if (now > nextMeteor) spawnMeteor(now);
+    meteors = meteors.filter(function (m) { return m.life > 0 && m.x > -100 && m.y < H + 100; });
+    meteors.forEach(function (m) {
+      m.x += m.vx; m.y += m.vy; m.life -= .012;
+      var grad = sctx.createLinearGradient(m.x, m.y, m.x - m.vx * 10, m.y - m.vy * 10);
+      grad.addColorStop(0, 'rgba(255, 240, 245,' + Math.max(m.life, 0) + ')');
+      grad.addColorStop(1, 'rgba(255, 240, 245, 0)');
+      sctx.strokeStyle = grad;
+      sctx.lineWidth = 1.6;
+      sctx.beginPath();
+      sctx.moveTo(m.x, m.y);
+      sctx.lineTo(m.x - m.vx * 10, m.y - m.vy * 10);
+      sctx.stroke();
+    });
     requestAnimationFrame(starLoop);
-  })();
+  })(0);
 
   // ---------- 滚动淡入 ----------
   var io = new IntersectionObserver(function (entries) {
