@@ -25,12 +25,66 @@ const { title, description = '全栈 · AI 开发工程师 - 个人主页' } = A
       rel="stylesheet"
     />
     <title>{title}</title>
+    <style is:global>
+      #site-gate { position: fixed; inset: 0; z-index: 9999; background: #fafafa; display: flex; align-items: center; justify-content: center; padding: 24px; font-family: Inter, system-ui, -apple-system, sans-serif; }
+      #site-gate.hidden { display: none; }
+      .site-gate-box { width: min(380px, 100%); text-align: center; }
+      .site-gate-eyebrow { color: #6b7280; font-size: 11px; letter-spacing: .28em; margin: 0; }
+      .site-gate-title { font-weight: 600; font-size: 24px; line-height: 1.5; color: #111827; margin: 18px 0 10px; }
+      .site-gate-hint { color: #6b7280; font-size: 14px; line-height: 1.8; margin: 0 0 26px; }
+      #site-gate-form { display: flex; gap: 10px; }
+      #site-gate-input { flex: 1; min-width: 0; font: inherit; font-size: 15px; padding: 12px 14px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #111827; outline: none; }
+      #site-gate-input:focus { border-color: #111827; }
+      #site-gate-form button { white-space: nowrap; font: inherit; font-size: 15px; padding: 12px 20px; border: none; border-radius: 8px; background: #111827; color: #fff; cursor: pointer; }
+      .site-gate-error { min-height: 20px; margin: 14px 0 0; font-size: 13px; color: #b91c1c; }
+      .site-gate-error:empty { display: none; }
+      body.locked { overflow: hidden; }
+      @keyframes site-gate-shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
+      .shake { animation: site-gate-shake .45s ease; }
+    </style>
   </head>
   <body class="min-h-screen flex flex-col">
+    <div id="site-gate" role="dialog" aria-modal="true" aria-label="访问密码">
+      <div class="site-gate-box">
+        <p class="site-gate-eyebrow">MIRO · PERSONAL SITE</p>
+        <h2 class="site-gate-title">这个网站需要一个密码</h2>
+        <p class="site-gate-hint">输入密码，才能继续访问。</p>
+        <form id="site-gate-form">
+          <input id="site-gate-input" type="password" autocomplete="off" placeholder="请输入访问密码" autofocus />
+          <button type="submit">进入</button>
+        </form>
+        <p id="site-gate-error" class="site-gate-error" role="alert"></p>
+      </div>
+    </div>
     <Header />
     <main class="flex-1">
       <slot />
     </main>
     <Footer />
+    <script is:inline>
+      (function () {
+        var gate = document.getElementById('site-gate');
+        if (!gate) return;
+        if (sessionStorage.getItem('site-unlocked') === '1') { gate.classList.add('hidden'); return; }
+        document.body.classList.add('locked');
+        var form = document.getElementById('site-gate-form');
+        var input = document.getElementById('site-gate-input');
+        var error = document.getElementById('site-gate-error');
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (input.value === '12345678900') {
+            sessionStorage.setItem('site-unlocked', '1');
+            document.body.classList.remove('locked');
+            gate.classList.add('hidden');
+          } else {
+            error.textContent = '密码不对哦，再想想。';
+            input.classList.remove('shake');
+            void input.offsetWidth;
+            input.classList.add('shake');
+            input.select();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
