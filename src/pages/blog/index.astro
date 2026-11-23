@@ -21,10 +21,10 @@ function estimateReadTime(body: string): string {
 }
 ---
 
-<BaseLayout title="随笔 - Miro" description="我的技术随笔、教程和思考。">
+<BaseLayout title="随笔 - Alzcoms的个人站" description="我的技术随笔、教程和思考。">
   <section class="section-padding">
     <div class="section-container">
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-3xl mx-auto reveal">
         <h1 class="text-3xl font-bold mb-2">随笔</h1>
         <p class="text-text-muted mb-8">技术思考、教程记录和个人感悟。</p>
 
@@ -45,10 +45,11 @@ function estimateReadTime(body: string): string {
 
         <!-- Posts List -->
         <div class="space-y-4" id="posts-list">
-          {posts.map((post) => (
+          {posts.map((post, i) => (
             <a
               href={`/blog/${post.id}`}
-              class="card p-6 block group"
+              class="card p-6 block group reveal"
+              data-delay={i * 100}
               data-tags={post.data.tags.join(',')}
             >
               <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
