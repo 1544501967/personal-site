@@ -3,12 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 ---
 
-<BaseLayout title="关于 - Miro" description="关于我的个人介绍、技能和工作经历。">
+<BaseLayout title="关于 - Alzcoms的个人站" description="关于我的个人介绍、技能和工作经历。">
   <section class="section-padding">
     <div class="section-container">
       <div class="max-w-3xl mx-auto">
         <!-- Intro -->
-        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8 mb-16">
+        <div class="flex flex-col sm:flex-row items-center sm:items-start gap-8 mb-16 reveal">
           <div class="w-32 h-32 rounded-2xl bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white text-4xl font-bold shrink-0">
             M
           </div>
@@ -27,7 +27,7 @@ import SocialLinks from '../components/SocialLinks.astro';
         </div>
 
         <!-- Skills -->
-        <div class="mb-16">
+        <div class="mb-16 reveal">
           <h2 class="text-2xl font-bold mb-6">技能</h2>
           <div class="grid sm:grid-cols-2 gap-4">
             {[
@@ -61,7 +61,7 @@ import SocialLinks from '../components/SocialLinks.astro';
         </div>
 
         <!-- Experience -->
-        <div class="mb-16">
+        <div class="mb-16 reveal">
           <h2 class="text-2xl font-bold mb-6">工作经历</h2>
           <div class="space-y-6">
             {[
@@ -92,7 +92,7 @@ import SocialLinks from '../components/SocialLinks.astro';
         </div>
 
         <!-- Education -->
-        <div>
+        <div class="reveal">
           <h2 class="text-2xl font-bold mb-6">教育背景</h2>
           <div class="space-y-6">
             {[
