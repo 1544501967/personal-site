@@ -32,7 +32,7 @@ function estimateReadTime(body: string): string {
   <!-- Hero Section -->
   <section class="section-padding">
     <div class="section-container">
-      <div class="max-w-3xl mx-auto text-center md:text-left md:mx-0">
+      <div class="max-w-3xl mx-auto text-center md:text-left md:mx-0 reveal">
         <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
           <!-- Avatar -->
           <div class="w-28 h-28 rounded-2xl bg-gradient-to-br from-primary to-primary-light flex items-center justify-center text-white text-3xl font-bold shrink-0">
@@ -48,7 +48,7 @@ function estimateReadTime(body: string): string {
             </p>
           </div>
         </div>
-        <div class="flex flex-wrap items-center justify-center md:justify-start gap-4">
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 reveal" data-delay="150">
           <a href="/about" class="btn-primary">
             了解更多
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -62,7 +62,7 @@ function estimateReadTime(body: string): string {
 
   <!-- Latest Blog Posts -->
   {latestPosts.length > 0 && (
-    <section class="section-padding bg-bg-alt">
+    <section class="section-padding bg-bg-alt reveal">
       <div class="section-container">
         <div class="flex items-center justify-between mb-8">
           <h2 class="text-2xl font-bold">最新随笔</h2>
@@ -71,8 +71,8 @@ function estimateReadTime(body: string): string {
           </a>
         </div>
         <div class="grid md:grid-cols-3 gap-6">
-          {latestPosts.map((post) => (
-            <a href={`/blog/${post.id}`} class="card p-6 group">
+          {latestPosts.map((post, i) => (
+            <a href={`/blog/${post.id}`} class="card p-6 group reveal" data-delay={i * 100}>
               <div class="flex flex-wrap gap-2 mb-3">
                 {post.data.tags.map((tag) => (
                   <span class="tag">{tag}</span>
@@ -101,7 +101,7 @@ function estimateReadTime(body: string): string {
 
   <!-- Featured Projects -->
   {featuredProjects.length > 0 && (
-    <section class="section-padding">
+    <section class="section-padding reveal">
       <div class="section-container">
         <div class="flex items-center justify-between mb-8">
           <h2 class="text-2xl font-bold">精选项目</h2>
@@ -110,8 +110,8 @@ function estimateReadTime(body: string): string {
           </a>
         </div>
         <div class="grid md:grid-cols-3 gap-6">
-          {featuredProjects.map((project) => (
-            <a href={`/projects/${project.id}`} class="card overflow-hidden group block">
+          {featuredProjects.map((project, i) => (
+            <a href={`/projects/${project.id}`} class="card overflow-hidden group block reveal" data-delay={i * 100}>
               <div class="aspect-video bg-gradient-to-br from-primary/5 to-primary-light/5 flex items-center justify-center overflow-hidden">
                 {project.data.image
                   ? <img src={project.data.image} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
