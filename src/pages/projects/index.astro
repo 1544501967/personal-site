@@ -21,10 +21,10 @@ const statusMap: Record<string, { label: string; color: string }> = {
 };
 ---
 
-<BaseLayout title="项目 - Miro" description="我的项目作品集。">
+<BaseLayout title="项目 - Alzcoms的个人站" description="我的项目作品集。">
   <section class="section-padding">
     <div class="section-container">
-      <div class="max-w-4xl mx-auto">
+      <div class="max-w-4xl mx-auto reveal">
         <h1 class="text-3xl font-bold mb-2">项目</h1>
         <p class="text-text-muted mb-8">我参与和创建的项目作品。</p>
 
@@ -45,13 +45,14 @@ const statusMap: Record<string, { label: string; color: string }> = {
 
         <!-- Projects Grid -->
         <div class="grid md:grid-cols-2 gap-6" id="projects-grid">
-          {projects.map((project) => {
+          {projects.map((project, i) => {
             const s = statusMap[project.data.status] ?? statusMap['in-progress'];
             const c = categoryMap[project.data.category] ?? '个人项目';
             return (
               <a
                 href={`/projects/${project.id}`}
-                class="card overflow-hidden group block"
+                class="card overflow-hidden group block reveal"
+                data-delay={i * 100}
                 data-tags={project.data.tags.join(',')}
               >
                 <div class="aspect-video bg-gradient-to-br from-primary/5 to-primary-light/5 flex items-center justify-center relative overflow-hidden">
