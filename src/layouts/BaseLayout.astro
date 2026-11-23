@@ -41,9 +41,16 @@ const { title, description = '全栈 · AI 开发工程师 - 个人主页' } = A
       body.locked { overflow: hidden; }
       @keyframes site-gate-shake { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
       .shake { animation: site-gate-shake .45s ease; }
+      /* scroll reveal: 内容随滚动淡入上浮 */
+      .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; will-change: opacity, transform; }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+      @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+      /* scroll progress bar */
+      #scroll-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 9998; background: #1E40ED; }
     </style>
   </head>
   <body class="min-h-screen flex flex-col">
+    <div id="scroll-progress" aria-hidden="true"></div>
     <div id="site-gate" role="dialog" aria-modal="true" aria-label="访问密码">
       <div class="site-gate-box">
         <p class="site-gate-eyebrow">MIRO · PERSONAL SITE</p>
@@ -76,6 +83,7 @@ const { title, description = '全栈 · AI 开发工程师 - 个人主页' } = A
             sessionStorage.setItem('site-unlocked', '1');
             document.body.classList.remove('locked');
             gate.classList.add('hidden');
+            window.dispatchEvent(new Event('site-unlocked'));
           } else {
             error.textContent = '密码不对哦，再想想。';
             input.classList.remove('shake');
@@ -84,6 +92,50 @@ const { title, description = '全栈 · AI 开发工程师 - 个人主页' } = A
             input.select();
           }
         });
+      })();
+    </script>
+    <script is:inline>
+      (function () {
+        function initReveal() {
+          var els = document.querySelectorAll('.reveal');
+          if (!('IntersectionObserver' in window)) {
+            els.forEach(function (el) { el.classList.add('visible'); });
+            return;
+          }
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              var el = entry.target;
+              el.classList.add('visible');
+              observer.unobserve(el);
+              var delay = parseInt(el.getAttribute('data-delay') || '0', 10) || 0;
+              setTimeout(function () { el.classList.remove('reveal'); el.style.transitionDelay = ''; }, 750 + delay);
+            });
+          }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+          els.forEach(function (el) {
+            var delay = el.getAttribute('data-delay');
+            if (delay) el.style.transitionDelay = delay + 'ms';
+            observer.observe(el);
+          });
+        }
+        function initProgress() {
+          var bar = document.getElementById('scroll-progress');
+          if (!bar) return;
+          var update = function () {
+            var h = document.documentElement;
+            var max = h.scrollHeight - h.clientHeight;
+            bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+          };
+          window.addEventListener('scroll', update, { passive: true });
+          update();
+        }
+        initProgress();
+        var gate = document.getElementById('site-gate');
+        if (gate && !gate.classList.contains('hidden') && sessionStorage.getItem('site-unlocked') !== '1') {
+          window.addEventListener('site-unlocked', initReveal, { once: true });
+        } else {
+          initReveal();
+        }
       })();
     </script>
   </body>
